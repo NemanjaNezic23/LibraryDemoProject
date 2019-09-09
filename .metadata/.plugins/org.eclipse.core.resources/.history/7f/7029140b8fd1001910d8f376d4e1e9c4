@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+	<h:outputStylesheet name="style/main.css"  />
+</h:head> 
+<body> 
+	
+<p:layout fullPage="true">
+	<p:layoutUnit position="west" size="300" minSize="150" maxSize="300">
+	<ui:insert name="westContent">
+		
+		</ui:insert>
+	</p:layoutUnit>
+
+
+	<p:layoutUnit id="centerLayout" position="center">
+			<ui:insert name="centerContent" >
+			<p:growl id="growl" showDetail="true" sticky="true" />  
+			</ui:insert>
+	</p:layoutUnit>
+
+
+	<p:layoutUnit position="east">
+	<ui:insert name="eastContent">
+		
+	</ui:insert>
+	</p:layoutUnit>
+	 <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">
+	 <ui:insert name="southContent">
+        <h:outputText value="South unit content." />
+        </ui:insert>
+    </p:layoutUnit>
+</p:layout>
+</body> 
+</html>

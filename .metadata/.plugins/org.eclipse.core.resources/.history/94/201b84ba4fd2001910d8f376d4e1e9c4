@@ -1,0 +1,186 @@
+<ui:composition template="./templates/layoutTemplate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<script type="text/javascript">
+    function handleDrop(event, ui) {
+        var droppedBook = ui.draggable;
+ 
+        droppedBook.fadeOut('fast');
+    }
+</script>
+
+	<ui:define name="centerContent">
+
+		<h:form id="bookForm">
+			<p:dataGrid id="availableBooks" style="wdth: 300px;"
+				styleClass="ui-background-bookshelf"
+				value="#{booksController.listOfAllBooks}" var="libraryBook"
+				columns="4" layout="grid">
+				<p:panel styleClass="bookPanel ui-text-center"
+					header="#{libraryBook.author}" id="libraryBooks">
+					<p:graphicImage styleClass="bookCover" library="book_covers"
+						name="#{libraryBook.author}.jpg" />
+				</p:panel>
+
+				<p:draggable for="libraryBooks" revert="true"
+					handle=".ui-panel-titlebar" stack=".ui-panel" />
+			</p:dataGrid>
+
+			<p:dialog height="500" width="800" id="bookRentDialog"
+				widgetVar="rentDialog" closable="false" modal="true">
+				<p:dataTable id="selectedBook" rowIndexVar="studentIndex"
+					selection="#{booksController.selectedStudents}" rowSelectMode="add"
+					value="#{booksController.listOfStudents}" var="student"
+					rowKey="#{student.studentId}" styleClass="ui-table-borderless">
+					<p:ajax event="toggleSelect" process="@this" />
+					<p:column selectRow="false" styleClass="ui-profile-thumbnail-column">
+				
+						<f:facet name="header">
+							<p:outputLabel value="Student" />
+						</f:facet>
+						<p:graphicImage styleClass="profileThumbnail"
+							url="https://i.pravatar.cc/150?img=#{student.studentId}" />
+
+						<p:outputLabel styleClass="ui-profile-info"
+							value="#{student.studentName} #{student.studentLastName}" />
+
+
+
+					</p:column>
+					<p:column selectRow="false" styleClass="ui-text-center">
+							<div class="ui-normalize-datepicker">
+						<p:datePicker value="#{student.returnDate}" pattern="dd-MM-yyyy" showIcon="true">
+								<p:ajax event="dateSelect" process="@this"  listener="#{student.onDateSelect}" />
+						
+						</p:datePicker>
+						</div>
+					</p:column>
+					<p:column width="30" selectionMode="multiple">
+
+					</p:column>
+					<f:facet name="footer">
+						<h:panelGroup layout="block" styleClass="ui-text-right">
+							<p:commandButton id="close" value="Cancel"
+								actionListener="#{booksController.onCancelBookRent}"
+								update="studentsForm bookForm:availableBooks @form" />
+							<p:commandButton id="rent" value="Rent the book"
+								actionListener="#{booksController.onRentBook}"
+								process=" bookForm:selectedBook @this"
+								update="studentsForm bookForm:availableBooks @form" />
+						</h:panelGroup>
+					</f:facet>
+
+				</p:dataTable>
+
+			</p:dialog>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="eastContent">
+		<h:form id="studentsForm">
+
+	<p:panel header="Other options">
+				<p:accordionPanel dynamic="true" cache="true">
+					<p:tab title="List of all students">
+						<p:dataTable id="selectedBook" rowIndexVar="studentIndex"
+							value="#{booksController.listOfStudents}" var="student"
+							style="width: 400px;">
+							<p:column>
+								<p:panel styleClass="ui-dialog-table-panel">
+									<f:facet name="header">
+										<p:graphicImage styleClass="profileThumbnail"
+											url="https://i.pravatar.cc/150?img=#{student.studentId}" />
+										<p:outputLabel styleClass="profileName"
+											value="#{student.studentName} #{student.studentLastName}" />
+
+
+									</f:facet>
+
+								</p:panel>
+
+
+								<p:dataTable value="#{student.rentdBooks}" var="rentedBook">
+									<p:column>
+										<f:facet name="header">
+											<p:outputLabel
+												value="Rented books: #{student.numberOfRentedBooks}" />
+										</f:facet>
+										<p:outputLabel value="#{rentedBook.author}" />
+									</p:column>
+									
+									<p:column>
+										<f:facet name="header">
+											<p:outputLabel value="Due in days:" />
+									</f:facet>
+										<p:progressBar value="#{rentedBook.dueInDays() * 10}"  displayOnly="true" labelTemplate="#{value} ofr %"  />
+									</p:column>
+								</p:dataTable>
+
+							</p:column>
+
+						</p:dataTable>
+
+					</p:tab>
+					<p:tab title="Currently rented books">
+						<p:panel>
+							<p:dataTable value="#{booksController.listOfAllRentedBooks}" var="rentedBooks">
+								<p:column headerText="Book">
+									<p:outputLabel value="#{rentedBooks.rentedBook.author}  #{rentedBooks.rentedBook.title}" />
+								</p:column>
+								<p:column headerText="Student renting">
+									<p:outputLabel value="#{rentedBooks.studentRenting.studentName} #{rentedBooks.studentRenting.studentLastName}" />									
+								</p:column>
+								<p:column headerText="Due in days">
+									<p:outputLabel value="#{rentedBooks.dueInDays()}" />
+								</p:column>
+							</p:dataTable>
+
+						</p:panel>
+					</p:tab>
+
+				</p:accordionPanel>
+			</p:panel>
+
+
+		</h:form>
+
+
+	</ui:define>
+<ui:define name="southContent">
+		<h:form id="bookBasketForm">
+			<p:panel id="selectedBooks" header="Drop here!">
+				<p:droppable for="bookBasketForm:selectedBooks" tolerance="touch"
+					activeStyleClass="ui-state-highlight"
+					datasource="bookForm:availableBooks">
+					<p:ajax listener="#{booksController.onBookDrop}"
+						update="bookForm:availableBooks bookBasketForm:selectedBooks" />
+				</p:droppable>
+
+				<p:dataTable id="booksToRent" var="bookToRent"
+					value="#{booksController.listOfBooksToRent}">
+					<p:column headerText="Author">
+						<p:outputLabel value="#{bookToRent.author}" />
+					</p:column>
+					<p:column headerText="Title">
+						<p:outputLabel value="#{bookToRent.title}" />
+					</p:column>
+
+					<f:facet name="footer">
+						<h:panelGroup layout="block" styleClass="ui-text-right">
+							<p:commandButton id="close" value="Clear records"
+								actionListener="#{booksController.onClearBooks}"
+								update="studentsForm bookForm:availableBooks @form" />
+							<p:commandButton id="rent" value="Rent the book"
+								onclick="PF('rentDialog').show()" />
+						</h:panelGroup>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

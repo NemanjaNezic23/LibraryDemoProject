@@ -1,0 +1,75 @@
+package com.demo.project.model;
+
+import java.sql.Date;
+import java.util.List;
+
+import org.primefaces.event.SelectEvent;
+
+public class StudentModel {
+
+	int  studentId;
+	String studentName;
+	String studentLastName;
+	List<BookModel> rentdBooks;
+	private Date returnDate;
+
+	public StudentModel() {
+
+	}
+
+	public StudentModel(int studentId, String studentName, String studentLastName, List<BookModel> rentdBooks) {
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentLastName = studentLastName;
+		this.rentdBooks = rentdBooks;
+	}
+
+	public int getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public String getStudentLastName() {
+		return studentLastName;
+	}
+
+	public void setStudentLastName(String studentLastName) {
+		this.studentLastName = studentLastName;
+	}
+
+	public List<BookModel> getRentdBooks() {
+		return rentdBooks;
+	}
+
+	public void setRentdBooks(List<BookModel> rentdBooks) {
+		this.rentdBooks = rentdBooks;
+	}
+
+	public int getNumberOfRentedBooks() {
+		return rentdBooks.size();
+	}
+
+	public Date getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
+	}
+	
+	public void onDateSelect(DateSelectEvenet event) {
+		System.out.println("calling date event");
+	}
+	
+}

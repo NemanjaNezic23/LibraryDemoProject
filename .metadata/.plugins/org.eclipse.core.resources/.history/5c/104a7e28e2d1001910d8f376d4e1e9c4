@@ -1,0 +1,161 @@
+package com.demo.project.controllers;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.DragDropEvent;
+import org.primefaces.event.SelectEvent;
+
+import com.demo.project.model.BookModel;
+import com.demo.project.model.StudentModel;
+import com.demo.project.model.StudentXBookModel;
+import com.demo.project.services.BookService;
+import com.demo.project.services.StudentService;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+@ManagedBean
+@ApplicationScoped
+public class BooksController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6058081026841395006L;
+
+	@ManagedProperty("#{bookService}")
+	private BookService bookService;
+
+	@ManagedProperty("#{studentService}")
+	private StudentService studentService;
+
+	private List<BookModel> listOfAllBooks;
+
+	private List<BookModel> listOfBooksToRent;
+
+	private List<StudentModel> listOfStudents;
+
+	private List<StudentXBookModel> listOfAllRentedBooks;
+	
+	private BookModel selectedBook;
+
+	private List<StudentModel> selectedStudents = new ArrayList<>();
+
+	@PostConstruct
+	public void init() {
+		listOfAllBooks = bookService.createBooks(10);
+		listOfStudents = studentService.createStudents(10);
+		listOfBooksToRent = new ArrayList<>();
+	}
+
+	public void onBookDrop(DragDropEvent bookDrop) {
+		selectedBook = ((BookModel) bookDrop.getData());
+		listOfBooksToRent.add(selectedBook);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+						"Book" + selectedBook.getTitle() + " successfully added to basket"));
+	}
+
+	public void onRentBook() {
+		List<StudentModel> tableSelection = new ArrayList<>();
+		tableSelection.addAll(selectedStudents);
+		for (StudentModel selection : tableSelection) {
+			for (StudentModel student : listOfStudents) {
+				if (selection.getStudentId() == student.getStudentId()) {
+					student.getRentdBooks().addAll(listOfBooksToRent);
+					student.getRentdBooks().forEach(x-> x.setRentedUntil(student.getReturnDate()));
+					student.getRentdBooks().forEach(x-> x.setRented(true));
+				}
+			}
+			updateRentedBooks();
+			listOfAllBooks.remove(selectedBook);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+					"Book rented to " + selectedStudents.size() + " students"));
+			selectedStudents.clear();
+			selectedBook = null;
+		}
+	}
+	
+	
+	private void updateRentedBooks() {
+		for (StudentModel student: listOfStudents) {
+			
+		}
+		
+		listOfStudents.forEach(stud -> stud.getRentdBooks().forEach(book -> listOfAllRentedBooks.add(new StudentXBookModel(stud, book, book.getRentedUntil()))));
+	}
+	
+	public void onCancelBookRent() {
+		PrimeFaces.current().executeScript("PF('bookRentDialogVar').hide()");
+		selectedStudents.clear();
+		selectedBook = null;
+	}
+
+	public BookService getBookService() {
+		return bookService;
+	}
+
+	public void setBookService(BookService bookService) {
+		this.bookService = bookService;
+	}
+
+	public List<BookModel> getListOfAllBooks() {
+		return listOfAllBooks;
+	}
+
+	public void setListOfAllBooks(List<BookModel> listOfAllBooks) {
+		this.listOfAllBooks = listOfAllBooks;
+	}
+
+
+
+	public List<BookModel> getListOfBooksToRent() {
+		return listOfBooksToRent;
+	}
+
+	public void setListOfBooksToRent(List<BookModel> listOfBooksToRent) {
+		this.listOfBooksToRent = listOfBooksToRent;
+	}
+
+	public BookModel getSelectedBook() {
+		return selectedBook;
+	}
+
+	public void setSelectedBook(BookModel selectedBook) {
+		this.selectedBook = selectedBook;
+	}
+
+	public List<StudentModel> getListOfStudents() {
+		return listOfStudents;
+	}
+
+	public void setListOfStudents(List<StudentModel> listOfStudents) {
+		this.listOfStudents = listOfStudents;
+	}
+
+	public StudentService getStudentService() {
+		return studentService;
+	}
+
+	public void setStudentService(StudentService studentService) {
+		this.studentService = studentService;
+	}
+
+	public List<StudentModel> getSelectedStudents() {
+		return selectedStudents;
+	}
+
+	public void setSelectedStudents(List<StudentModel> selectedStudents) {
+		this.selectedStudents = selectedStudents;
+	}
+
+}

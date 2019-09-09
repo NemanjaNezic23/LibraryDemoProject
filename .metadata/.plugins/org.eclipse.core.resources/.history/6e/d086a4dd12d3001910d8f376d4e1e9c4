@@ -1,0 +1,300 @@
+@charset "ISO-8859-1";
+
+/* layout fixes for drag&drop events*/
+.ui-layout-center {
+	z-index: 20 !important;
+	overflow: visible !important;
+}
+
+.ui-layout-center .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+.ui-layout-unit {
+	border: none !important;
+}
+
+/* utility classes */
+.ui-text-center {
+	text-align: center;
+}
+
+.ui-text-right {
+	text-align: right;
+}
+
+.ui-students-panels {
+	border: 1px solid #4285f4 !important;
+	border-radius: 10px;
+	background: #f0f0f0;
+}
+
+.ui-students-panels .ui-panel-titlebar {
+	color: #4285f4;
+	border: 0 !important;
+	background: none;
+}
+
+.ui-students-panels .ui-panel-footer {
+	background: none !important;
+	text-align: center !important;
+}
+
+/* main background and text color*/
+.ui-main-background {
+	background: #4285f4;
+	color: #f8f9fa;
+	border: 1px solid #4285f4
+}
+
+.profileThumbnail {
+	height: 60px;
+	width: 60px;
+	border-radius: 60px;
+	float: left;
+	border: 2px solid #4285f4;
+}
+
+.profileName {
+	padding: 19px;
+	float: right;
+}
+
+/* bookshelf background for datagrid*/
+#centerLayout>div {
+	background: url("#{resource['backgrounds/bookshelf-texture.jpg']}");
+	background-size: contain;
+}
+
+.bookPanel {
+	height: 150px;
+	width: 150px;
+	margin: 18px auto;
+	background: none;
+	border: none;
+}
+
+/* remove datagrid's background to apply bookshelf texture*/
+.ui-datagrid-content {
+	background: none;
+}
+.ui-datagrid-content.ui-widget-content {
+	border: 0;
+}
+/* book covers*/
+.bookCover {
+	position: relative;
+	height: 126px;
+	width: 82px;
+	left: 14px;
+	top: 19px;
+	transform: skew(0deg, -12deg);
+}
+
+.rentedBookCover {
+	position: relative;
+    height: 126px;
+    width: 82px;
+    left: 14px;
+    top: -170px;
+    transform: skew(0deg, -12deg);
+}
+
+.ui-g:nth-child(1) {
+	margin-top: 80px;
+}
+
+.ui-g:nth-child(2) {
+	margin-top: -14px;
+}
+
+.ui-rental-info.ui-g:nth-child(1) {
+	margin-top: 0;
+}
+
+.ui-panelgrid-content .ui-g:nth-child(1) {
+	margin:10px 0;
+}
+
+.blankBookCover {
+	height: 200px;
+	width: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.rentedBlankBook {
+	height: 200px;
+	width: 200px;
+}
+
+.blankRentedCoverFix {
+	left: auto !important;
+}
+
+.rentedBook {
+	left: 52px !important;
+}
+
+.ui-panel-content {
+	padding: 0 !important;
+}
+
+.bookPanel>.ui-panel-titlebar {
+	background: transparent;
+	color: #000;
+	border: 0;
+	margin: 0;
+}
+
+.ui-panel-title {
+	margin: 0 !important;
+}
+/* datatable styles */
+.ui-datatable-odd.ui-state-hover, ui.datatable-even.ui-state-hover {
+	background: #4285f4;
+}
+
+.ui-datatable-footer {
+	background: #f0f0f0;
+}
+
+.ui-blue-table {
+	border: 2px solid #4285f4;
+}
+
+.ui-selection-column {
+	text-align: center;
+}
+
+.ui-table-borderless tbody td {
+	border: 0px !important;
+}
+
+.ui-table-borderless tr.ui-datatable-even:hover, .ui-table-borderless tr.ui-datatable-odd:hover
+	{
+	background: #4285f4;
+	color: #fff;
+}
+
+.ui-datatable th {
+	background: #4285f4 !important;
+	color: #f8f9fa !important;
+}
+
+.ui-students-table thead {
+	display: none;
+}
+
+.ui-cornered-table-blue {
+	margin-top: 5px;
+	border-radius: 10px;
+	border: 1px solid #4285f4;
+	border-radius: 10px;
+}
+
+.ui-table-borderless table {
+	border-collapse: separate !important;
+}
+
+/* profile utility classes  */
+.ui-profile-info {
+	line-height: 60px;
+	float: left;
+	margin-left: 20px;
+	vertical-align: middle;
+}
+
+/* datepicker fixes in tables */
+.ui-normalize-datepicker {
+	position: absolute;
+	box-sizing: border-box;
+}
+/* dialog overlay */
+.ui-dialog-mask {
+	z-index: 2 !important;
+}
+
+/* acordition styles */
+.ui-accordion .ui-accordion-content {
+	padding: 0 !important;
+}
+
+.ui-accord-header.ui-state-default {
+	background: #f0f0f0;
+}
+
+.ui-accord-header.ui-state-active {
+	background: #4285f4 !important;
+	color: #f8f9fa !important;
+	font-weight: 300 !important;
+}
+
+.ui-state-default {
+	text-shadow: 0 !important;
+}
+
+.ui-state-active {
+	text-shadow: none !important;
+}
+
+.ui-accordion-header .ui-state-active, .ui-state-default .ui-accord-header
+	{
+	background: #fff !important;
+}
+/* change default icon to white one */
+.ui-accord-header.ui-state-active .ui-icon {
+	background-image:
+		url("#{resource['primefaces-aristo:images/ui-icons_ffffff_256x240.png']}");
+}
+/* panel styles */
+.ui-students-panels {
+	padding: 0;
+}
+
+.ui-panel-borderless {
+	border: none !important;
+}
+
+.ui-widget-borderless .ui-panel-footer {
+	border: none !important;
+}
+
+/* separator styles */
+.ui-separator {
+	border: 1px solid #4285f4 !important;
+}
+
+/* button styles */
+.ui-button-secondary {
+	color: #007bff !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	border-color: #007bff !important;
+	background: #fff !important;
+	border: 1px solid #007bff !important;
+	border-radius: 15px;
+}
+
+.ui-button-secondary.ui-state-hover {
+	background: #007bff !important;
+	color: #fff !important;
+	transition: color 0.3s ease-in, background 0.3s ease-in;
+}
+
+.ui-button-primary {
+	color: #fff !important;
+	background-image: none !important;
+	border-color: #007bff !important;
+	background: #007bff !important;
+	text-shadow: none !important;
+	border: 1px solid #007bff !important;
+	border-radius: 15px;
+}
+
+.ui-button-primary.ui-state-default, .ui-button-secondary.ui-state-default
+	{
+	box-shadow: none;
+	}
+

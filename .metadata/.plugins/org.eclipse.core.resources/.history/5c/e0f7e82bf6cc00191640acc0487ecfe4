@@ -1,0 +1,73 @@
+@charset "ISO-8859-1";
+
+/* layout fixes for drag&drop events*/
+.ui-layout-center {
+	z-index: 20 !important;
+	overflow: visible !important;
+}
+
+.ui-layout-center .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+/* utility classes */
+
+.ui-text-center {
+	text-align: center;
+}
+
+.ui-text-right {
+	text-align: right;
+}
+
+
+.ui-panel-titlebar {
+	color: blue;
+}
+
+.profileThumbnail {
+	height: 60px;
+	width: 60px;
+	border-radius: 60px;
+	float: left;
+}
+
+.profileName {
+	padding: 19px;
+	float: right;
+}
+
+
+/* bookshelf background for datagrid*/
+#centerLayout>div {
+	background:
+		url("https://static.tumblr.com/8x9m588/C8ho55ylx/bg-wood2.png");
+}
+
+.bookPanel {
+	height: 238px;
+	width: 200px;
+	margin: 18px auto;
+	background: none;
+	border: none;
+}
+
+/* remove datagrid's background to apply bookshelf texture*/
+.ui-datagrid-content {
+	background: none;
+}
+/* book covers*/
+.bookCover {
+	height: 200px;
+	width: 200px;
+}
+
+.ui-panel-content {
+	padding: 0 !important;
+}
+
+.bookPanel>.ui-panel-titlebar {
+	background: #fff;
+	color: black;
+	margin: 0;
+}

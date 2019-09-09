@@ -1,0 +1,24 @@
+package com.demo.project.model;
+
+import java.util.List;
+
+public class StudentModel {
+
+	String studentId;
+	String studentName;
+	String studentLastName;
+	List<BookModel> rentdBooks;
+
+	public StudentModel(String studentId, String studentName, String studentLastName, List<BookModel> rentdBooks) {
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentLastName = studentLastName;
+		this.rentdBooks = rentdBooks;
+	}
+
+	
+	
+	public List<StudentModel> createStudents(int numberOfStudents) {
+		
+	}
+}

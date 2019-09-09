@@ -1,0 +1,10 @@
+package com.demo.project.model;
+
+import java.sql.Date;
+
+public class StudentXBookModel {
+
+	private String studentId;
+	private String bookId;
+	private Date rentedUtill;
+}

@@ -1,0 +1,8 @@
+package com.demo.project.model;
+
+public class StudentXBookModel {
+
+	private String studentId;
+	private String bookId;
+	private Date rentedUtill;
+}

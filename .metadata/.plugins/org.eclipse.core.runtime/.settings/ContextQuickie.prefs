@@ -1,0 +1,5 @@
+TortoiseGitEnabled=true
+TortoiseGitScanForLinkedResources=true
+TortoiseGitUseMenuConfigFromRegistry=true
+TortoiseGitWorkingCopyDetection=true
+eclipse.preferences.version=1

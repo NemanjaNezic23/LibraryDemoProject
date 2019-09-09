@@ -1,0 +1,66 @@
+package com.demo.project.services;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+
+import com.demo.project.model.StudentModel;
+
+@ManagedBean(name="studentService")
+@ApplicationScoped
+public class StudentService {
+
+	private static final List<String> names;
+	private static final String[] lastNames;
+	
+	static {
+		names = new ArrayList<>();
+		names.add("John");
+		names.add("Charlie");
+		names.add("Liam");
+		names.add( "Noah");
+		names.add( "William");
+		names.add( "James");
+		names.add( "Ethan");
+		names.add( "Lucas");
+		names.add( "Jacob" );
+		names.add( "Aiden" );
+				
+		lastNames = new ArrayList<>();;
+		lastNames[0] = "Davis";
+		lastNames[1] = "Smith";
+		lastNames[2] = "Hernandez";
+		lastNames[3] = "Lopez";
+		lastNames[4] = "Gonzalez";
+		lastNames[5] = "Wilson";
+		lastNames[6] = "Anderson";
+		lastNames[7] = "Johnson";
+		lastNames[8] = "Wiliams";
+		lastNames[9] = "Brown";
+				
+	}
+	
+	public List<StudentModel> createStudents(int numberOfStudents){ 
+		List<StudentModel> listOfStudents = new ArrayList<>();
+		for (int i=0; i< numberOfStudents; i++ ) {
+			listOfStudents.add(new StudentModel(getRandomStudentId(), getRandomStudentName(), getRandomStudentLastName(), new ArrayList<>()));
+		}
+		return listOfStudents;
+	}
+	
+	
+	private String getRandomStudentId() {
+		return UUID.randomUUID().toString();
+	}
+
+	private String getRandomStudentName() {
+		return names.get(((int) (Math.random() * 10)));
+	}
+
+	private String getRandomStudentLastName() {
+		return lastNames.get(((int) (Math.random() * 10)));
+	}
+} 

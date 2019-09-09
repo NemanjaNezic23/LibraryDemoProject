@@ -1,0 +1,126 @@
+@charset "ISO-8859-1";
+
+/* layout fixes for drag&drop events*/
+.ui-layout-center {
+	z-index: 20 !important;
+	overflow: visible !important;
+}
+
+.ui-layout-center .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+/* utility classes */
+
+.ui-text-center {
+	text-align: center;
+}
+
+.ui-text-right {
+	text-align: right;
+}
+
+
+.ui-panel-titlebar {
+	color: blue;
+}
+
+/* main background and text color*/
+.ui-main-background {
+	background: #4285f4;
+	color: #f8f9fa;
+}
+
+.profileThumbnail {
+	height: 60px;
+	width: 60px;
+	border-radius: 60px;
+	float: left;
+}
+
+.profileName {
+	padding: 19px;
+	float: right;
+}
+
+
+/* bookshelf background for datagrid*/
+#centerLayout>div {
+/* 	background:
+		url("https://static.tumblr.com/8x9m588/C8ho55ylx/bg-wood2.png"); */
+		background: url("#{resource['backgrounds/bookshelf-texture.jpg']}");
+		background-size: cover;
+}
+
+.bookPanel {
+	height: 150px;
+	width: 150px;
+	margin: 18px auto;
+	background: none;
+	border: none;
+}
+
+/* remove datagrid's background to apply bookshelf texture*/
+.ui-datagrid-content {
+	background: none;
+}
+/* book covers*/
+.bookCover {
+	height: 150px;
+	width: 150px;
+}
+
+.ui-panel-content {
+	padding: 0 !important;
+}
+
+.bookPanel>.ui-panel-titlebar {
+	background: #fff;
+	color: black;
+	margin: 0;
+}
+
+.ui-panel-title{
+	margin: 0 !important;	
+}
+/* datatable styles */ 
+.ui-selection-column{
+	text-align: center;
+}
+.ui-table-borderless tbody td {
+	border: 0px !important;	
+}
+.ui-widget-content, .ui-widget-content .ui-state-default, .ui-datatable-footer .ui-widget-header  {
+	border: 0px !important;
+}
+
+.ui-datatable th {
+	background: #4285f4 !important;
+	color: #f8f9fa !important;
+}
+
+/* profile utility classes  */ 
+.ui-profile-info {
+	line-height: 60px;
+	float: left;
+	margin-left: 20px;
+	vertical-align: middle;
+}
+
+/* datepicker fixes in tables */
+
+.ui-normalize-datepicker{
+	position: absolute;
+	box-sizing: border-box;
+	
+}
+/* dialog overlay */
+.ui-dialog-mask{
+	 z-index: 2 !important; 
+}
+
+/* acordition sknning */
+
+.ui-accordion .ui-accordion-content {
+	padding: 0 !important;
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="C:/Users/ytm/.m2/repository/com/sun/faces/jsf-api/2.1.13/jsf-api-2.1.13.jar"/>
+  <path value="C:/Users/ytm/.m2/repository/javax/javaee-web-api/7.0/javaee-web-api-7.0.jar"/>
+  <path value="C:/Users/ytm/.m2/repository/com/sun/faces/jsf-impl/2.1.13/jsf-impl-2.1.13.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/meta-inf/html_basic.tld" project="demo_project"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/meta-inf/jsf_core.tld" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/meta-inf/mojarra_ext.taglib.xml" project="demo_project"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/meta-inf/mojarra_ext.tld" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/com/sun/faces/metadata/taglib/composite.taglib.xml" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/com/sun/faces/metadata/taglib/facelets_jsf_core.taglib.xml" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/com/sun/faces/metadata/taglib/html_basic.taglib.xml" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/com/sun/faces/metadata/taglib/jstl-core.taglib.xml" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/com/sun/faces/metadata/taglib/jstl-fn.taglib.xml" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/com/sun/faces/metadata/taglib/mojarra_ext.taglib.xml" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.1.13.jar/com/sun/faces/metadata/taglib/ui.taglib.xml" project="demo_project"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="C:/Users/ytm/.m2/repository/org/primefaces/primefaces/7.0/primefaces-7.0.jar">
+   <libraries>
+    <library class="faces-config">
+     <id class="model-object"
+      path="FileSystems/lib-primefaces-7.0.jar/meta-inf/faces-config.xml" project="demo_project"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-primefaces-7.0.jar/meta-inf/primefaces-p.taglib.xml" project="demo_project"/>
+    </library>
+   </libraries>
+  </path>
+ </paths>
+ <validation>
+  <el/>
+ </validation>
+ <aliases/>
+ <includes/>
+ <uris/>
+</kb-project>

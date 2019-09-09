@@ -1,0 +1,165 @@
+package com.demo.project.controllers;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.DragDropEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
+
+import com.demo.project.model.BookModel;
+import com.demo.project.model.StudentModel;
+import com.demo.project.services.BookService;
+import com.demo.project.services.StudentService;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@ManagedBean
+@ApplicationScoped
+public class BooksController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6058081026841395006L;
+
+	@ManagedProperty("#{bookService}")
+	private BookService bookService;
+
+	@ManagedProperty("#{studentService}")
+	private StudentService studentService;
+
+	private static List<BookModel> listOfAllBooks = new ArrayList<>();
+
+	private List<BookModel> rentedBooks;
+
+	private static List<StudentModel> listOfStudents = new ArrayList<>();
+
+	private BookModel selectedBook;
+
+	private List<StudentModel> selectedStudents;
+
+	public BooksController() {
+
+	}
+	
+	@PostConstruct
+	public void init() {
+	
+		listOfAllBooks = bookService.getAvailableBooks();
+		listOfStudents = studentService.getAvailableStudents();
+		rentedBooks = new ArrayList<>();
+	}
+
+	public void onBookDrop(DragDropEvent bookDrop) {
+		PrimeFaces.current().executeScript("PF('bookRentDialogVar').show()");
+		selectedBook = ((BookModel) bookDrop.getData());
+
+	}
+
+	public void onRentBook() {
+		System.out.println("ZOVEM EKSHN");
+		System.out.println("selected => " + this.getSelectedStudents().size());
+		for (StudentModel selection : this.getSelectedStudents()) {
+			for (StudentModel student : listOfStudents) {
+				if (selection.getStudentId() == student.getStudentId()) {
+					student.getRentdBooks().add(selectedBook);
+				}
+			}
+			PrimeFaces.current().executeScript("PF('bookRentDialogVar').close()");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+					"Book rented to " + selectedStudents.size() + " students"));
+			selectedStudents.clear();
+			selectedBook = null;
+		}
+	}
+
+	public void onCancelBookRent() {
+		PrimeFaces.current().executeScript("PF('bookRentDialogVar').close()");
+		selectedStudents.clear();
+		selectedBook = null;
+	}
+	
+	  public void onRowSelect(SelectEvent event) {
+	        FacesMessage msg = new FacesMessage("Car Selected", ((StudentModel) event.getObject()).getStudentLastName());
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	    }
+	 
+	    public void onRowUnselect(UnselectEvent event) {
+	        FacesMessage msg = new FacesMessage("Car Selected", ((StudentModel) event.getObject()).getStudentLastName());
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	    }
+
+	public BookService getBookService() {
+		return bookService;
+	}
+
+	public void setBookService(BookService bookService) {
+		this.bookService = bookService;
+	}
+
+	public List<BookModel> getListOfAllBooks() {
+		return listOfAllBooks;
+	}
+
+	public void setListOfAllBooks(List<BookModel> listOfAllBooks) {
+		BooksController.listOfAllBooks = listOfAllBooks;
+	}
+
+	public List<BookModel> getRentedBooks() {
+		return rentedBooks;
+	}
+
+	public void setRentedBooks(List<BookModel> rentedBooks) {
+		this.rentedBooks = rentedBooks;
+	}
+
+	public BookModel getSelectedBook() {
+		return selectedBook;
+	}
+
+	public void setSelectedBook(BookModel selectedBook) {
+		this.selectedBook = selectedBook;
+	}
+
+	public List<StudentModel> getListOfStudents() {
+		return listOfStudents;
+	}
+
+	public void setListOfStudents(List<StudentModel> listOfStudents) {
+		BooksController.listOfStudents = listOfStudents;
+	}
+
+	public StudentService getStudentService() {
+		return studentService;
+	}
+
+	public void setStudentService(StudentService studentService) {
+		this.studentService = studentService;
+	}
+
+	public List<StudentModel> getSelectedStudents() {
+		return selectedStudents;
+	}
+
+	public void setSelectedStudents(List<StudentModel> selectedStudents) {
+		this.selectedStudents = selectedStudents;
+	}
+
+	public void check(SelectEvent event) {
+		System.out.println("IN CHECK");
+		StudentModel stud = ((StudentModel) event.getObject());
+		System.out.println((stud.getStudentLastName()));
+		getSelectedStudents().add(stud);
+	}
+	
+
+}

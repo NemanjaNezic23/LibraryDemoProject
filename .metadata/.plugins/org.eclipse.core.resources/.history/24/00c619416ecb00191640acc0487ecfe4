@@ -1,0 +1,5 @@
+package com.demo.project.jsf.config;
+
+public class Jsf23Activator {
+
+}

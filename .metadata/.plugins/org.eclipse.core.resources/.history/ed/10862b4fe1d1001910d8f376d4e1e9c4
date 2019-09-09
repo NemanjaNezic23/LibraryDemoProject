@@ -1,0 +1,36 @@
+package com.demo.project.model;
+
+import java.sql.Date;
+
+public class StudentXBookModel {
+
+	private String studentId;
+	private String bookId;
+	private Date rentedUtill;
+
+	
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
+
+	public Date getRentedUtill() {
+		return rentedUtill;
+	}
+
+	public void setRentedUtill(Date rentedUtill) {
+		this.rentedUtill = rentedUtill;
+	}
+
+}

@@ -1,0 +1,92 @@
+package com.demo.project.services;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+
+import com.demo.project.model.BookModel;
+
+@ManagedBean(name = "bookService")
+@ApplicationScoped
+public class BookService {
+
+	private final static HashMap<String, String> authorsAndBookTitles;
+	private final static List<String> genres;
+
+	static {
+		authors = new HashMap<>();
+		authors.put("George R.R. Martin");
+		authors.put("A.G. Riddle");
+		authors.put("David Baldacci");
+		authors.put("Stephen King");
+		authors.put("H.P. Lovecraft");
+		authors.put("Clive Barker");
+		authors.put("Jules Verne");
+		authors.put("Arthur C. Clarke");
+		authors.put("John Cheever");
+		authors.put("James Baldwin");
+		authors.put("Anton Chekhov");
+		authors.put("Ginger Strand");
+		authors.put("Robert Graysmith");
+
+		genres = new ArrayList<>();
+		genres.add("Action and adventure");
+		genres.add("Horror");
+		genres.add("Science fiction");
+		genres.add("Short story");
+		genres.add("Science");
+		genres.add("True crime");
+
+	}
+
+	public List<BookModel> createBooks(int numberOfBooks) {
+		List<BookModel> listOfBooks = new ArrayList<>();
+		for (int i = 0; i <= numberOfBooks; i++) {
+			listOfBooks.add(new BookModel(String.valueOf(i), authors.get(i), getRandomGenre(), getBookByAuthor(authors.get(i)),
+					getCurrentDate(), getRandomRentState()));
+		}
+		return listOfBooks;
+	}
+
+	
+	private String getBookByAuthor(String authorName) {
+		switch(authorName) { 
+			case "George R.R. Martin": 
+				return "Song of Ice and Fire";
+				break;
+			case "Stephen King":
+				return "The Shining";
+				break;
+			case "David Baldacci":
+				return "Memory Man";
+				break;
+			case "James Baldwin"
+			
+		}
+	}
+	
+	private String getRandomId() {
+		return UUID.randomUUID().toString().substring(0,8);
+	}
+
+	private String getRandomAuthor() {
+		return authors.get(((int) (Math.random() * 10)));
+	}
+
+	private String getRandomGenre() {
+		return genres.get((int) (Math.random() * 6));
+	}
+
+	private boolean getRandomRentState() {
+		return (Math.random() > 0.5) ? true : false;
+	}
+
+	private Date getCurrentDate() {
+		return new Date(System.currentTimeMillis());
+	}
+}

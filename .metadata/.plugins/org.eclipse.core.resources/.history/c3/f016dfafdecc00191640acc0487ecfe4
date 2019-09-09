@@ -1,0 +1,92 @@
+package com.demo.project.services;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+
+import com.demo.project.model.BookModel;
+
+@ManagedBean(name = "bookService")
+@ApplicationScoped
+public class BookService {
+
+	private final static HashMap<String, String> authorsAndBookTitles;
+	private final static List<String> genres;
+
+	static {
+		authorsAndBookTitles = new HashMap<>();
+		authorsAndBookTitles.put("George R.R. Martin", "Song of Ice and Fire");
+		authorsAndBookTitles.put("A.G. Riddle", "Departure");
+		authorsAndBookTitles.put("David Baldacci", "Memory Man");
+		authorsAndBookTitles.put("Stephen King", "The Shining");
+		authorsAndBookTitles.put("H.P. Lovecraft", "Necronomicon");
+		authorsAndBookTitles.put("Clive Barker", "Imajica");
+		authorsAndBookTitles.put("Jules Verne", "Around the world in 80 days");
+		authorsAndBookTitles.put("Arthur C. Clarke", "Childhood's End");
+		authorsAndBookTitles.put("John Cheever");
+		authorsAndBookTitles.put("James Baldwin", "The evidence of things not seen");
+		authorsAndBookTitles.put("Anton Chekhov");
+		authorsAndBookTitles.put("Ginger Strand");
+		authorsAndBookTitles.put("Robert Graysmith");
+
+		genres = new ArrayList<>();
+		genres.add("Action and adventure");
+		genres.add("Horror");
+		genres.add("Science fiction");
+		genres.add("Short story");
+		genres.add("Science");
+		genres.add("True crime");
+
+	}
+
+	public List<BookModel> createBooks(int numberOfBooks) {
+		List<BookModel> listOfBooks = new ArrayList<>();
+		for (int i = 0; i <= numberOfBooks; i++) {
+			listOfBooks.add(new BookModel(String.valueOf(i), authorsAndBookTitles.get(i), getRandomGenre(), getBookByAuthor(authorsAndBookTitles.get(i)),
+					getCurrentDate(), getRandomRentState()));
+		}
+		return listOfBooks;
+	}
+
+	
+	private String getBookByAuthor(String authorName) {
+		switch(authorName) { 
+			case "George R.R. Martin": 
+				return "Song of Ice and Fire";
+				break;
+			case "Stephen King":
+				return "The Shining";
+				break;
+			case "David Baldacci":
+				return "Memory Man";
+				break;
+			case "James Baldwin"
+			
+		}
+	}
+	
+	private String getRandomId() {
+		return UUID.randomUUID().toString().substring(0,8);
+	}
+
+	private String getRandomAuthor() {
+		return authorsAndBookTitles.get(((int) (Math.random() * 10)));
+	}
+
+	private String getRandomGenre() {
+		return genres.get((int) (Math.random() * 6));
+	}
+
+	private boolean getRandomRentState() {
+		return (Math.random() > 0.5) ? true : false;
+	}
+
+	private Date getCurrentDate() {
+		return new Date(System.currentTimeMillis());
+	}
+}

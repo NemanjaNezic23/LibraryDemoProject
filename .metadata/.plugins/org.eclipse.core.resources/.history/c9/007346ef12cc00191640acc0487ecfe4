@@ -1,0 +1,60 @@
+package com.demo.project.services;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import com.demo.project.model.StudentModel;
+
+public class StudentService {
+
+	private static final String[] names;
+	private static final String[] lastNames;
+	
+	static {
+		names = new String[10];
+		names[0] = "John";
+		names[1] = "Charlie";
+		names[2] = "Liam";
+		names[3] = "Noah";
+		names[4] = "William";
+		names[5] = "James";
+		names[6] = "Ethan";
+		names[7] = "Lucas";
+		names[8] = "Jacob";
+		names[9] = "Aiden";
+				
+		lastNames = new String[10];
+		lastNames[0] = "Davis";
+		lastNames[1] = "Smith";
+		lastNames[2] = "Hernandez";
+		lastNames[3] = "Lopez";
+		lastNames[4] = "Gonzalez";
+		lastNames[5] = "Wilson";
+		lastNames[6] = "Anderson";
+		lastNames[7] = "Johnson";
+		lastNames[8] = "Wiliams";
+		lastNames[9] = "Brown";
+				
+	}
+	
+	public List<StudentModel> createStudents(int numberOfStudents){ 
+		List<StudentModel> listOfStudents = new ArrayList<>();
+		for (int i=0; i< numberOfStudents; i++ ) {
+			listOfStudents.add(new StudentModel(getRandomStudentId(), studentName, studentLastName, rentdBooks));
+		}
+		return listOfStudents;
+	}
+	
+	
+	private String getRandomStudentId() {
+		return UUID.randomUUID().toString();
+	}
+	
+	private fillStudentMetaData() {
+		for (int i=0; i< 10; i++) {
+			names[i]=
+		}
+	}
+	
+} 

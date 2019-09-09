@@ -1,0 +1,73 @@
+package com.demo.project.services;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+import javax.enterprise.context.ApplicationScoped;
+
+
+@ApplicationScoped
+public class BookService {
+
+	private final static List<String> authors;
+	private final static List<String> genres;
+	
+	static {
+		authors = new ArrayList<>();
+		authors.add("George R.R. Martin");
+		authors.add("A.G. Riddle");
+		authors.add("David Baldacci");
+		authors.add("Stephen King");
+		authors.add("H.P. Lovecraft");
+		authors.add("Clive Barker");
+		authors.add("Jules Verne ");
+		authors.add("Arthur C. Clarke");
+		authors.add("John Cheever");
+		authors.add("James Baldwin");
+		authors.add("Anton Chekhov");
+		authors.add("Ginger Strand");
+		authors.add("Robert Graysmith");
+		
+		
+		genres = new ArrayList<>();
+		genres.add("Action and adventure");
+		genres.add("Horror");
+		genres.add("Science fiction");
+		genres.add("Short story");
+		genres.add("Science");
+		genres.add("True crime");
+		
+		
+	}
+	
+	public List<BookModel> createBooks(int numberOfBooks) {
+		List<BookModel> listOfBooks = Collections.emptyList();
+		for(int i=0;i<=numberOfBooks; i++) {
+			listOfBooks.add(new BookModel(getRandomId(), getRandomAuthor(), getRandomGenre(), "book title", getCurrentDate(), getRandomRentState()));
+		}
+		return listOfBooks;
+	}
+	
+	private String getRandomId() {
+		return UUID.randomUUID().toString();
+	}
+	
+	private String getRandomAuthor() {
+		return authors.get((int) Math.random() * 10);
+	}
+	
+	private String getRandomGenre() {
+		return genres.get((int) Math.random() * 10);
+	}
+	
+	private boolean getRandomRentState() {
+		return (Math.random() > 0.5) ? true : false;
+	}
+	
+	private Date getCurrentDate() {
+		return new Date(System.currentTimeMillis());
+	}
+}

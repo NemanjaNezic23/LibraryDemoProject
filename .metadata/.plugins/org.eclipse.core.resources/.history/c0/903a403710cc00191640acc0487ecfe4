@@ -1,0 +1,51 @@
+package com.demo.project.model;
+
+import java.util.List;
+
+public class StudentModel {
+
+	String studentId;
+	String studentName;
+	String studentLastName;
+	List<BookModel> rentdBooks;
+
+	public StudentModel(String studentId, String studentName, String studentLastName, List<BookModel> rentdBooks) {
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentLastName = studentLastName;
+		this.rentdBooks = rentdBooks;
+	}
+
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public String getStudentLastName() {
+		return studentLastName;
+	}
+
+	public void setStudentLastName(String studentLastName) {
+		this.studentLastName = studentLastName;
+	}
+
+	public List<BookModel> getRentdBooks() {
+		return rentdBooks;
+	}
+
+	public void setRentdBooks(List<BookModel> rentdBooks) {
+		this.rentdBooks = rentdBooks;
+	}
+
+}
